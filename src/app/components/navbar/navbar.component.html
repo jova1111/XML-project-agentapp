@@ -1,0 +1,22 @@
+<nav class="navbar navbar-inverse">
+    <div>
+      <div class="navbar-header">  
+          <span class="menu-label">Meни</span>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/home">Почетна</a></li>
+          <span *ngIf="!isLogged">
+            <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/register">Registruj se</a></li>
+            <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/login">Login</a></li>
+          </span>
+        </ul>
+      </div>
+    </div>
+</nav>

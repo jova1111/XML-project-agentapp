@@ -1,0 +1,60 @@
+<div class="layout">
+  <h2>Register</h2>
+  <form #form = "ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="place">Place:</label>
+      <input type="text" class="form-control" id="place" name="place"  [(ngModel)]="lodging.place" myAutofocus>
+    </div>
+
+	<div class="form-group">
+      <label for="place">Price:</label>
+      <input type="text" class="form-control" id="price" name="price"  [(ngModel)]="lodging.price" >
+    </div>
+
+	<div class="form-group">
+      <label for="place">Guest number:</label>
+      <input type="number" class="form-control" id="guestNumber" name="guestNumber"  [(ngModel)]="lodging.guestNumber" >
+    </div>
+
+	<div class="form-group">
+      <label for="place">Category:</label>
+      <select class="form-control" id="category" name="category" (change)="setValue($event.target.value)">
+		<option  *ngFor = "let cat of categories" value={{cat.id}}>{{cat.name}}</option>
+	  </select>
+    </div>
+	
+	<div class="form-group">
+      <label for="place">Lodging type:</label>
+      <select class="form-control" id="lodgingtype" name="lodgingtype" (change)="setType($event.target.value)">
+		<option  *ngFor = "let type of types" value={{type.id}}>{{type.name}}</option>
+	  </select>
+    </div>
+	
+    <div class="form-group">
+      <label for="description">Descriptoion:</label>
+      <input type="text" class="form-control" id="description" name="description"  [(ngModel)]="lodging.description">
+    </div>
+	<label for="description">Services:</label>
+	<div class ="form-group" *ngFor = "let service of services">
+
+		 <input type="checkbox" name="value" (change)="onChange(service, $event.target.checked)"> {{service.name}}<br>
+	</div>
+	
+	<div class="form-group">
+      <label for="fromDate">From date:</label>
+      <input type="date" class="form-control" id="fromDate" name="fromDate"  [(ngModel)]="lodging.fromDate" >
+    </div>
+	<div class="form-group">
+      <label for="toDate">To date:</label>
+      <input type="date" class="form-control" id="toDate" name="toDate"  [(ngModel)]="lodging.toDate" >
+    </div>
+	<button class="btn btn-primary">Register</button>
+  </form>
+	
+	<input id="imageInput" type="file" #Image accept="image/*" placeholder="Image"(change)="handleFileInput($event.target.files)" multiple >
+	<input type="button" value="Aploaduj" (click)="uploadImage()">
+	
+	
+  
+
+</div>
