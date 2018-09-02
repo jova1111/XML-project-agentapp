@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef,AfterViewInit,ViewChild } from '@angular/core';
 import { Lodging } from '../../model/Lodging';
 import { Service } from '../../model/Service';
 import { Category } from '../../model/Category';
 import { LodgingType } from '../../model/LodgingType';
 import { ImageUri } from '../../model/ImageUri';
+import { Period } from '../../model/Period';
 import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
@@ -12,7 +14,7 @@ import { AuthService } from '../../services/auth.service';
   providers: [ AuthService ]
 })
 export class RegisterFormComponent implements OnInit {
-
+  @ViewChild('periods') periodsDiv: ElementRef;
   private lodging: Lodging = new Lodging();
   private services: Service[] = [];
   private lodgingServices: Service [] = [];
@@ -20,19 +22,25 @@ export class RegisterFormComponent implements OnInit {
   private types: LodgingType[] = [];
   private imageUris: string[] = [];
   private files : File[]=[];
+  private periods: Period[] =[];
+  private period : Period = new Period();
   private images: ImageUri[] = [];
   private imageUri: ImageUri = new ImageUri();
+  
   constructor(private authService: AuthService) { 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 	  
-	 this.authService.getServices().then(res => this.services = res);
-	 
-	 this.authService.getCategories().then(res => this.categories = res);
-	 this.authService.getTypes().then(res => this.types = res);
+	 await this.authService.getServices().then(res => this.services = res);
+	 await this.authService.getCategories().then(res => this.categories = res);
+	 await this.authService.getTypes().then(res => this.types = res);
+
+	 console.log(this.categories);
+	 console.log(this.types);
 	 
   }
+  
 
 	onChange(service:Service, isChecked: boolean) {
 		console.log(service);
@@ -79,11 +87,20 @@ export class RegisterFormComponent implements OnInit {
 		}
 		console.log('ubacio sve');
 	}
-  onSubmit() {
+	addPeriod(){
+		var tempPeriod = new Period();
+		tempPeriod.dateFrom = this.period.dateFrom;
+		tempPeriod.dateTo = this.period.dateTo;
+		tempPeriod.reserved = true;
+		this.periods.push(tempPeriod);
+
+	}
+	
+  async onSubmit() {
 	  this.lodging.service=this.lodgingServices;
 	  this.lodging.images=this.images;
-	  console.log(this.lodging.fromDate);
-    this.authService.register(this.lodging).then(
+	  this.lodging.periods = await this.authService.savePeriods(this.periods) ;
+	  this.authService.register(this.lodging).then(
       (response) => console.log(response),
       (error) => console.log(error) 
     );

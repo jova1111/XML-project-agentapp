@@ -7,17 +7,25 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { LodgingsComponent} from './components/lodgings/lodgings.component';
+import { LodgingComponent} from './components/lodging/lodging.component';
+import { ReservationsComponent} from './components/reservations/reservations.component';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
-
+import { LodgingService } from './services/lodging.service';
+import { ReservationsService } from './services/reservations.service';
 const appRoutes: Routes = [
  
   { path: 'register', component: RegisterFormComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'lodgings', component: LodgingsComponent },
+  { path : 'lodging/:id' , component : LodgingComponent },
+  { path : 'reservations' , component : ReservationsComponent },
   { path: '',
     redirectTo: '/home',
     pathMatch: 'full'
   }
+  
 ];
 
 @NgModule({
@@ -25,7 +33,10 @@ const appRoutes: Routes = [
     AppComponent,
     RegisterFormComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+	LodgingsComponent,
+	LodgingComponent,
+	ReservationsComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +44,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule
   ],
-  providers: [ HttpClientModule, AuthService ],
+  providers: [ HttpClientModule, AuthService, LodgingService, ReservationsService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

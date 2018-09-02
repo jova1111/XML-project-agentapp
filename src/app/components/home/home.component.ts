@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 	  console.log("pogodio");
-	  this.homeService.synchronize();
+	 // this.homeService.synchronize();
 	  
   }
 

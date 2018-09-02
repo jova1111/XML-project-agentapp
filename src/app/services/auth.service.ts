@@ -3,6 +3,8 @@ import { Lodging } from '../model/Lodging';
 import { Service } from '../model/Service';
 import { Category } from '../model/Category';
 import { LodgingType } from '../model/LodgingType';
+import { Period } from '../model/Period';
+
 import { ImageUri } from '../model/ImageUri';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -50,6 +52,7 @@ export class AuthService {
 	  
   }
   public getCategories():Promise<Category[]> {
+    console.log('DOSO');
 	  return this.http.get(this.serverURL+ '/categories').toPromise()
         .then(this.extractData)
         .catch(this.handleError);
@@ -64,6 +67,7 @@ export class AuthService {
       
 	  
   }
+  
    public async saveImage(imageUri: ImageUri):Promise<ImageUri> {
 	   
 	   await this.http.post(this.serverURL+ '/image',imageUri).toPromise()
@@ -119,5 +123,15 @@ export class AuthService {
 	await this.http.post(endpoint, formData, { headers: headers}).toPromise().then(res=>{val=res.data.link;});
 	
 	return val;
+	}
+	
+	public async savePeriods(periods: Period[]):Promise<Period[]>{
+		const headers: HttpHeaders = new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})
+                                     .append('Content-Type', 'application/json');
+                                 
+		return await this.http.post(this.serverURL+ '/period',periods, {headers:headers}).toPromise()
+        .then(this.extractData)
+        .catch(this.handleError);
+
 	}
 }

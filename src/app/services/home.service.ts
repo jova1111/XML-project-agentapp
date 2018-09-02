@@ -17,10 +17,10 @@ export class HomeService {
   private imageUri: ImageUri= new ImageUri();
   constructor(private http: HttpClient) { }
 
-  public synchronize(){
+ /* public synchronize(){
 	
     
-                                     ;
+                                     
     this.http.post(this.serverURL + '/welcome').toPromise();
-  }
+  }*/
 }

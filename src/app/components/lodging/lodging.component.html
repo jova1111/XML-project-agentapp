@@ -1,0 +1,10 @@
+<div class="layout">
+    
+	
+	
+	
+	<div *ngFor = "let period of lodging.periods">From: {{period.dateFrom | date}} to {{period.dateTo | date}}<button type="button" class="btn btn-primary" (click)="reserve(period.id)">Reserve</button></div>
+	
+  
+
+</div>
