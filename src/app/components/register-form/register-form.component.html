@@ -2,8 +2,12 @@
   <h2>Register</h2>
   <form #form = "ngForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
+      <label for="place">Name:</label>
+      <input type="text" class="form-control" id="name" name="name"  [(ngModel)]="lodging.name" myAutofocus>
+    </div>
+	<div class="form-group">
       <label for="place">Place:</label>
-      <input type="text" class="form-control" id="place" name="place"  [(ngModel)]="lodging.location" myAutofocus>
+      <input type="text" class="form-control" id="place" name="place"  [(ngModel)]="lodging.location">
     </div>
 
 	<div class="form-group">

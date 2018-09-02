@@ -30,9 +30,9 @@ export class LodgingService {
         .then(this.extractData)
         .catch(this.handleError);
 	}
-	public reservePeriod(id:string){
-		console.log(id);
-		return this.http.put(this.serverURL+ '/reserve/'+id).toPromise()
+	public reservePeriod(id:string,lodgingId:string){
+		console.log(id);		
+		return this.http.put(this.serverURL+ '/reserve/'+id+'_'+lodgingId).toPromise()
         .then(this.extractData)
         .catch(this.handleError);
 	}

@@ -14,5 +14,6 @@ export class Lodging {
 	lodgingType : LodgingType;
 	images : ImageUri[];
 	periods: Period[];
+	name :string;
 	
 }

@@ -27,9 +27,9 @@ export class ReservationsService {
         .catch(this.handleError);
     }
 	
-	public confirmReservation(id:string){
+	public confirmReservation(id:string,lodgingId:string){
 		console.log(id);
-		return this.http.put(this.serverURL+ '/confirm/'+id).toPromise()
+		return this.http.put(this.serverURL+ '/confirm/'+id+'_'+lodgingId).toPromise()
         .then(this.extractData)
         .catch(this.handleError);
 	}

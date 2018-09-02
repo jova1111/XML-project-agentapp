@@ -38,7 +38,7 @@ export class LodgingComponent implements OnInit {
   
 	public async reserve(id:string){
 		console.log(id);
-	await this.lodgingService.reservePeriod(id);
+	await this.lodgingService.reservePeriod(id,this.id);
 }
 }
 

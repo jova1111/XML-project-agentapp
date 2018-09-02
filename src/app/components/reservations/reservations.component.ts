@@ -29,12 +29,12 @@ export class ReservationsComponent implements OnInit {
 		
 	this.reservations = await this.reservationsService.getReservations();
 	console.log(this.reservations);
-	console.log("OPA")
+	
   }
   
-	public async confirm(id:string){
+	public async confirm(id:string,lodgingId:string){
 		console.log(id);
-	await this.reservationsService.confirmReservation(id);
+	await this.reservationsService.confirmReservation(id,lodgingId);
 }
 }
 

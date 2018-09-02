@@ -3,7 +3,7 @@
 	
 	
 	
-	<div *ngFor = "let reservation of reservations">{{reservation.id}}<button type="button" class="btn btn-primary" (click)="confirm(reservation.id)">Confirm reservation</button></div>
+	<div *ngFor = "let reservation of reservations">{{reservation.lodging.name}}<button type="button" class="btn btn-primary" (click)="confirm(reservation.id,reservation.lodging.id)">Confirm reservation</button></div>
 	
   
 

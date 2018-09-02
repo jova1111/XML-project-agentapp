@@ -91,7 +91,7 @@ export class RegisterFormComponent implements OnInit {
 		var tempPeriod = new Period();
 		tempPeriod.dateFrom = this.period.dateFrom;
 		tempPeriod.dateTo = this.period.dateTo;
-		tempPeriod.reserved = true;
+		tempPeriod.reserved = false;
 		this.periods.push(tempPeriod);
 
 	}
@@ -100,6 +100,7 @@ export class RegisterFormComponent implements OnInit {
 	  this.lodging.service=this.lodgingServices;
 	  this.lodging.images=this.images;
 	  this.lodging.periods = await this.authService.savePeriods(this.periods) ;
+	  console.log(this.lodging.periods);
 	  this.authService.register(this.lodging).then(
       (response) => console.log(response),
       (error) => console.log(error) 
