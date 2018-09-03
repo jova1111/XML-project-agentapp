@@ -1,7 +1,7 @@
 import { Service } from './Service'
 import { Category } from './Category'
 import { LodgingType } from './LodgingType'
-import { ImageUri } from './ImageUri'
+import { ImageUrl } from './ImageUrl'
 import { Period } from './Period'
 
 export class Lodging {
@@ -12,7 +12,7 @@ export class Lodging {
 	price : number;
 	category : Category;
 	lodgingType : LodgingType;
-	images : ImageUri[];
+	imageUrls : ImageUrl[];
 	periods: Period[];
 	name :string;
 	

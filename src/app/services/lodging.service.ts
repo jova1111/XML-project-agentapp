@@ -5,7 +5,7 @@ import { Category } from '../model/Category';
 import { LodgingType } from '../model/LodgingType';
 import { Period } from '../model/Period';
 
-import { ImageUri } from '../model/ImageUri';
+import { ImageUrl } from '../model/ImageUrl';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';

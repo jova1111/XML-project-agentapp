@@ -5,7 +5,7 @@ import { Category } from '../model/Category';
 import { LodgingType } from '../model/LodgingType';
 import { Period } from '../model/Period';
 
-import { ImageUri } from '../model/ImageUri';
+import { ImageUrl } from '../model/ImageUrl';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
@@ -14,16 +14,15 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from'@angula
 
 @Injectable()
 export class AuthService {
-
   readonly serverURL: string = 'http://127.0.0.1:9000';
-  private imageUri: ImageUri= new ImageUri();
+  private imageUrl: ImageUrl= new ImageUrl();
   constructor(private http: HttpClient) { }
 
-  public login(lodging: Lodging) {
+  /*public login(lodging: Lodging) {
     var data = {
       /*client_id: '2',
       client_secret: 'dRKS8omkeSCVp4VdaCZnd2DItMHxdlur96NGOine',
-      grant_type: 'password',*/
+      grant_type: 'password',
       email: lodging.place,
       password: lodging.description
     };
@@ -37,6 +36,11 @@ export class AuthService {
           reject('Нисте унели исправне податке!');
         });
     });
+  }
+  */public login(agentId: string){
+	   return this.http.get(this.serverURL+ '/login/'+agentId).toPromise()
+        .then(alert("USPEO"))
+        .catch(this.handleError);
   }
 
   private authenticate(tokenStr: string, expDate: number) {
@@ -68,12 +72,12 @@ export class AuthService {
 	  
   }
   
-   public async saveImage(imageUri: ImageUri):Promise<ImageUri> {
+   public async saveImage(imageUrl: ImageUrl):Promise<ImageUrl> {
 	   
-	   await this.http.post(this.serverURL+ '/image',imageUri).toPromise()
-        .then(res=>{this.imageUri=res})
+	   await this.http.post(this.serverURL+ '/image',imageUrl).toPromise()
+        .then(res=>{this.imageUrl=res})
         .catch(this.handleError);
-      return this.imageUri;
+      return this.imageUrl;
 	  
   }
   public isAuthenticated():boolean {

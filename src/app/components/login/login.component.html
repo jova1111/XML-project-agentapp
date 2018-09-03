@@ -1,0 +1,10 @@
+<div class="layout">
+<form #form = "ngForm" (ngSubmit)="onSubmit()">
+	 <div class="form-group">
+      <label for="place">Name:</label>
+      <input type="text" class="form-control" id="name" name="name"  [(ngModel)]="agentId" myAutofocus>
+		<button  type="submit" class="btn btn-primary">Login</button>
+	</div>
+	
+</form>
+</div>

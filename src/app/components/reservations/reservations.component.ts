@@ -4,7 +4,7 @@ import { Reservation } from '../../model/Reservation';
 import { Service } from '../../model/Service';
 import { Category } from '../../model/Category';
 import { LodgingType } from '../../model/LodgingType';
-import { ImageUri } from '../../model/ImageUri';
+import { ImageUrl } from '../../model/ImageUrl';
 import { Period } from '../../model/Period';
 import { ReservationsService } from '../../services/reservations.service';
 import { ActivatedRoute } from '@angular/router';

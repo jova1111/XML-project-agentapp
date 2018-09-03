@@ -3,7 +3,7 @@ import { Lodging } from '../../model/Lodging';
 import { Service } from '../../model/Service';
 import { Category } from '../../model/Category';
 import { LodgingType } from '../../model/LodgingType';
-import { ImageUri } from '../../model/ImageUri';
+import { ImageUrl } from '../../model/ImageUrl';
 import { Period } from '../../model/Period';
 import { LodgingService } from '../../services/lodging.service';
 

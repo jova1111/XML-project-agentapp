@@ -3,7 +3,7 @@ import { Lodging } from '../../model/Lodging';
 import { Service } from '../../model/Service';
 import { Category } from '../../model/Category';
 import { LodgingType } from '../../model/LodgingType';
-import { ImageUri } from '../../model/ImageUri';
+import { ImageUrl } from '../../model/ImageUrl';
 import { Period } from '../../model/Period';
 import { AuthService } from '../../services/auth.service';
 
@@ -24,8 +24,8 @@ export class RegisterFormComponent implements OnInit {
   private files : File[]=[];
   private periods: Period[] =[];
   private period : Period = new Period();
-  private images: ImageUri[] = [];
-  private imageUri: ImageUri = new ImageUri();
+  private images: ImageUrl[] = [];
+  private imageUrl: ImageUrl = new ImageUrl();
   
   constructor(private authService: AuthService) { 
   }
@@ -70,22 +70,24 @@ export class RegisterFormComponent implements OnInit {
 		for (var i = 0; i < files.length; i++) {
 				this.files.push(files[i]);
 		}
+		console.log(this.files);
 		
 	}
 	async uploadImage(){
 		
 		for(var i=0; i < this.files.length ; i++){
-			let imgUri= await this.authService.postImage(this.files[i]);
-			
-			
-			this.imageUri.setUri(imgUri);
-			console.log(this.imageUri);
-			this.imageUri= await this.authService.saveImage(this.imageUri);
-			console.log(this.imageUri);
-			this.images.push(this.imageUri);
+			let imgUrl= await this.authService.postImage(this.files[i]);
+			console.log('vratio: ' + imgUrl);
+			this.imageUrl = new ImageUrl();
+			this.imageUrl.url = imgUrl;
+			console.log(this.imageUrl);
+			this.imageUrl= await this.authService.saveImage(this.imageUrl);
+			console.log(this.imageUrl);
+			this.images.push(this.imageUrl);
 			console.log('ubacio')
 		}
 		console.log('ubacio sve');
+		console.log(this.images);
 	}
 	addPeriod(){
 		var tempPeriod = new Period();
@@ -98,12 +100,13 @@ export class RegisterFormComponent implements OnInit {
 	
   async onSubmit() {
 	  this.lodging.service=this.lodgingServices;
-	  this.lodging.images=this.images;
+	  this.lodging.imageUrls=this.images;
 	  this.lodging.periods = await this.authService.savePeriods(this.periods) ;
 	  console.log(this.lodging.periods);
-	  this.authService.register(this.lodging).then(
+
+	this.authService.register(this.lodging).then(
       (response) => console.log(response),
-      (error) => console.log(error) 
+      (error) => console.log(error)
     );
   }
 
