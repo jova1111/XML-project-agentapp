@@ -1,4 +1,4 @@
-import { Service } from './Service'
+import { Favour } from './Favour'
 import { Category } from './Category'
 import { LodgingType } from './LodgingType'
 import { ImageUrl } from './ImageUrl'
@@ -8,7 +8,7 @@ export class Lodging {
     place: string;
     guestNumber : number;
     description: string;
-	service : Service[];
+	favours : Favour[];
 	price : number;
 	category : Category;
 	lodgingType : LodgingType;

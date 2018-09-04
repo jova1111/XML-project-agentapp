@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef,AfterViewInit,ViewChild } from '@angular/core';
 import { Lodging } from '../../model/Lodging';
-import { Service } from '../../model/Service';
 import { Category } from '../../model/Category';
 import { LodgingType } from '../../model/LodgingType';
 import { ImageUrl } from '../../model/ImageUrl';

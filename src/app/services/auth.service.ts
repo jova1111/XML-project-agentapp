@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Lodging } from '../model/Lodging';
-import { Service } from '../model/Service';
+import { Favour } from '../model/Favour';
 import { Category } from '../model/Category';
 import { LodgingType } from '../model/LodgingType';
 import { Period } from '../model/Period';
@@ -38,17 +38,26 @@ export class AuthService {
     });
   }
   */public login(agentId: string){
-	   return this.http.get(this.serverURL+ '/login/'+agentId).toPromise()
-        .then(alert("USPEO"))
-        .catch(this.handleError);
-  }
+	  return new Promise((resolve, reject)=> {
+		  this.http.post(this.serverURL + '/login/'+agentId).subscribe(
+        (response: any) => {
+          this.authenticate(response.token, response.expiresIn);
+          resolve("Successfully logged in!");
+		  window.top.location.href="/home";
+        },
+        (error: HttpErrorResponse) => {
+          reject('Error');
+        });
+	   
+	  });
+	}
 
   private authenticate(tokenStr: string, expDate: number) {
     let token = { value: tokenStr, expirationDate: Date.now() + expDate * 1000 }
     localStorage.setItem('token', JSON.stringify(token));
   }
 
-  public getServices():Promise<Service[]> {
+  public getServices():Promise<Favour[]> {
 	  return this.http.get(this.serverURL+ '/service').toPromise()
         .then(this.extractData)
         .catch(this.handleError);
@@ -104,12 +113,12 @@ export class AuthService {
   }
   
   public register(lodging: Lodging) {
-    const headers: HttpHeaders = new HttpHeaders({'X-Requested-With': 'XMLHttpRequest'})
-                                     .append('Content-Type', 'application/json');
-    return new Promise((resolve, reject) => {this.http.post(this.serverURL + '/lodging', lodging, { headers: headers } ).subscribe(
+    let headers = {'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('token')).value}
+    return new Promise((resolve, reject) => {this.http.post(this.serverURL + '/secure/lodging', lodging, { headers: headers } ).subscribe(
       (success) => {
         resolve(success)
-		console.log(success)
+		alert("Successfully created!!!");
+		window.top.location.href = "/register";
       }, 
       (error) => {
         reject(error)

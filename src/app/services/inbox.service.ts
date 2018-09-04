@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Lodging } from '../model/Lodging';
-import { Service } from '../model/Service';
 import { Category } from '../model/Category';
 import { LodgingType } from '../model/LodgingType';
 import { Message } from '../model/Message';
@@ -22,7 +21,8 @@ export class InboxService {
 
   
 	public getMessages():Promise<Message[]> {
-	  return this.http.get(this.serverURL+ '/messages').toPromise()
+	let headers = {'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('token')).value}
+	  return this.http.get(this.serverURL+ '/secure/messages',{headers:headers}).toPromise()
         .then(this.extractData)
         .catch(this.handleError);
     }
@@ -41,8 +41,8 @@ export class InboxService {
 	  console.log(id);
 	  console.log(message.content);
 	  return  await this.http.post(this.serverURL+ '/message/'+id,message).toPromise()
-        .then(this.extractData)
-        .catch(this.handleError);
+        .then(alert("Message sent!"), window.top.location.href="/inbox/")
+		.catch(this.handleError);
   }
 	
 }

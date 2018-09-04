@@ -11,11 +11,18 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/home">Почетна</a></li>
-          <span *ngIf="!isLogged">
-            <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/register">Registruj se</a></li>
-            <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/login">Login</a></li>
+		<span *ngIf="!isLogged">
+          <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/login">Login</a></li>
+        </span>
+		<span *ngIf="isLogged">
+          <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/home">Home</a></li>
+		  <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/lodgings">Lodgings</a></li>
+			<li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/inbox">Inbox</a></li>
+          <li><a [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" routerLink="/reservations">Reservations</a></li>
+		    <li><a (click)="onClick($event)">Logout</a></li>
           </span>
+		  
+          
         </ul>
       </div>
     </div>

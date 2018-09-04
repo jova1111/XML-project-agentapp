@@ -27,7 +27,7 @@ const appRoutes: Routes = [
   { path : 'reservations' , component : ReservationsComponent },
   { path : 'login', component : LoginComponent},
   { path : 'inbox', component : InboxComponent},
-  { path : 'send/:id' component: MessageComponent},
+  { path : 'send/:id', component: MessageComponent},
   { path: '',
     redirectTo: '/home',
     pathMatch: 'full'

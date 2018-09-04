@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef,AfterViewInit,ViewChild } from '@angular/core';
 import { Lodging } from '../../model/Lodging';
-import { Service } from '../../model/Service';
 import { Category } from '../../model/Category';
 import { LodgingType } from '../../model/LodgingType';
 import { ImageUrl } from '../../model/ImageUrl';
@@ -32,7 +31,7 @@ export class LodgingComponent implements OnInit {
 		
 	console.log(this.id);
 	this.lodging = await this.lodgingService.getById(this.id);
-	console.log(this.lodging.periods);
+	console.log(this.lodging);
 	console.log("OPA")
   }
   

@@ -3,7 +3,7 @@
 	
 	
 	
-	<div *ngFor = "let reservation of reservations">{{reservation.lodging.name}}<button type="button" class="btn btn-primary" (click)="confirm(reservation.id,reservation.lodging.id)">Confirm reservation</button></div>
+	<ng-container *ngFor = "let reservation of reservations" ><div *ngIf = "reservation.activated == false">Lodging: {{reservation.lodging.name}} <br> From {{reservation.period.dateFrom| date}} to {{reservation.period.dateTo| date}}<button type="button" class="btn btn-primary" (click)="confirm(reservation.id,reservation.lodging.id)">Confirm reservation</button><hr></div></ng-container>
 	
   
 

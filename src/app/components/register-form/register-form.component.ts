@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef,AfterViewInit,ViewChild } from '@angular/core';
 import { Lodging } from '../../model/Lodging';
-import { Service } from '../../model/Service';
+import { Favour } from '../../model/Favour';
 import { Category } from '../../model/Category';
 import { LodgingType } from '../../model/LodgingType';
 import { ImageUrl } from '../../model/ImageUrl';
@@ -16,8 +16,8 @@ import { AuthService } from '../../services/auth.service';
 export class RegisterFormComponent implements OnInit {
   @ViewChild('periods') periodsDiv: ElementRef;
   private lodging: Lodging = new Lodging();
-  private services: Service[] = [];
-  private lodgingServices: Service [] = [];
+  private services: Favour[] = [];
+  private lodgingServices: Favour [] = [];
   private categories: Category[] = [];
   private types: LodgingType[] = [];
   private imageUris: string[] = [];
@@ -42,7 +42,7 @@ export class RegisterFormComponent implements OnInit {
   }
   
 
-	onChange(service:Service, isChecked: boolean) {
+	onChange(service:Favour, isChecked: boolean) {
 		console.log(service);
 		if(isChecked) {
 			this.lodgingServices.push(service);
@@ -86,7 +86,7 @@ export class RegisterFormComponent implements OnInit {
 			this.images.push(this.imageUrl);
 			console.log('ubacio')
 		}
-		console.log('ubacio sve');
+		alert('Saved images!');
 		console.log(this.images);
 	}
 	addPeriod(){
@@ -99,7 +99,7 @@ export class RegisterFormComponent implements OnInit {
 	}
 	
   async onSubmit() {
-	  this.lodging.service=this.lodgingServices;
+	  this.lodging.favours=this.lodgingServices;
 	  this.lodging.imageUrls=this.images;
 	  this.lodging.periods = await this.authService.savePeriods(this.periods) ;
 	  console.log(this.lodging.periods);

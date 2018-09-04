@@ -1,9 +1,18 @@
 <div class="layout">
     
+	Name: {{lodging.name}} <br>
+	Location: {{lodging.location}} <br>
+	Type: {{lodging.lodgingType.typeName}}<br>
+	Category: {{lodging.category.categoryName}} <br>
+	Guest number: {{lodging.guestNumber}}<br>
+	Favours:<ul>
+	<li *ngFor ="let favour of lodging.favours">{{favour.name}} </li>
+	</ul>
+	Images:<ul>
+	<li *ngFor ="let image of lodging.imageUrls"><img src="{{image.url}}" width="100" height="100"> </li>
+	</ul>
 	
-	
-	
-	<div *ngFor = "let period of lodging.periods">From: {{period.dateFrom | date}} to {{period.dateTo | date}}<button type="button" class="btn btn-primary" (click)="reserve(period.id)">Reserve</button></div>
+	Periods: <ng-container *ngFor = "let period of lodging.periods" ><div *ngIf = "period.reserved == false" >From: {{period.dateFrom | date}} to {{period.dateTo | date}}<button type="button" class="btn btn-primary" (click)="reserve(period.id)">Reserve</button></div></ng-container>
 	
   
 

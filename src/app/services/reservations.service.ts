@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Lodging } from '../model/Lodging';
-import { Service } from '../model/Service';
 import { Category } from '../model/Category';
 import { LodgingType } from '../model/LodgingType';
 import { Period } from '../model/Period';
@@ -22,7 +21,8 @@ export class ReservationsService {
 
   
 	public getReservations():Promise<Reservation[]> {
-	  return this.http.get(this.serverURL+ '/reservations').toPromise()
+		let headers = {'Authorization' : 'Bearer ' + JSON.parse(localStorage.getItem('token')).value}
+	  return this.http.get(this.serverURL+ '/secure/reservations',{headers:headers}).toPromise()
         .then(this.extractData)
         .catch(this.handleError);
     }
